@@ -1,5 +1,7 @@
 html {
   font-size: 14px;
+  
+  
 }
 
 @media (min-width: 768px) {
@@ -14,5 +16,17 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    font-family: 'Allerta Stencil', sans-serif;
+    color:aqua;
+    background-color: black;
+    
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
 }
