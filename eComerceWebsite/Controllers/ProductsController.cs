@@ -1,6 +1,7 @@
 ﻿using eComerceWebsite.Data;
 using eComerceWebsite.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace eComerceWebsite.Controllers
 {
@@ -10,6 +11,21 @@ namespace eComerceWebsite.Controllers
         public ProductsController(ProductsContext context)
         {
             _context = context;
+        }
+
+        
+        public async Task<IActionResult> Index()
+        {
+            //method syntax
+            // Get all products from the DB
+            List<Products> products = await _context.Products.ToListAsync();
+
+            // Query Syntax
+            // List<Products> products = await (from product in _context.Products
+            //                            select product).ToListAsync();
+
+            // Show them on the web page
+            return View(products);
         }
 
         [HttpGet]
