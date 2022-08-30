@@ -15,16 +15,16 @@ namespace eComerceWebsite.Models
         public int ProductID { get; set; }
 
         /// <summary>
-        /// The rating of a product.
-        /// If applicable.
-        /// </summary>
-        public string? Rating { get; set; }
-
-        /// <summary>
         /// The name of the Product.
         /// </summary>
         [Required]
         public string ProductName { get; set; }
+
+        /// <summary>
+        /// The rating of a product.
+        /// If applicable.
+        /// </summary>
+        public string? Rating { get; set; }
 
         /// <summary>
         /// The type of Product it is classified as. 
