@@ -62,6 +62,20 @@ namespace eComerceWebsite.Controllers
             }
             return View(productToEdit);
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Products productModel)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Products.Update(productModel);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+            }
+            return View(productModel);
+        }
     }
 }
  
