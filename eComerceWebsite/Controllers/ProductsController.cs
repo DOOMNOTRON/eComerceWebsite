@@ -14,18 +14,35 @@ namespace eComerceWebsite.Controllers
         }
 
         
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
-            //method syntax
+            const int NumGamesToDisplayPerPage = 3;
+            const int PageOffset = 1; // Made a page offset to use current page and figure out num games to skip
+
+            int currentPage = id ?? 1; // Set currentPage to id if it has a value, otherwise use 1
+
+            int totalNumberOfProducts = await _context.Products.CountAsync();
+            double maxNumPages = Math.Ceiling((double)totalNumberOfProducts / NumGamesToDisplayPerPage);
+            int lastPage = Convert.ToInt32(maxNumPages); // Rounding pages up to next whole page number
+
+            //method syntax version
             // Get all products from the DB
-            List<Products> products = await _context.Products.ToListAsync();
+            List<Products> products = 
+                 await _context.Products
+                 .Skip(NumGamesToDisplayPerPage * (currentPage - PageOffset))
+                 .Take(NumGamesToDisplayPerPage)
+                 .ToListAsync();
 
-            // Query Syntax
-            // List<Products> products = await (from product in _context.Products
-            //                            select product).ToListAsync();
+            // Query Syntax version
+            //List<Products> products = await (from product in _context.Products
+            //                                select product)
+            //                                .Skip(NumGamesToDisplayPerPage * (currentPage - PageOffset))
+            //                                .Take(NumGamesToDisplayPerPage)
+            //                                .ToListAsync();
 
+            ProductCatalogViewModel catalogModel = new(products, lastPage, currentPage);
             // Show them on the web page
-            return View(products);
+            return View(catalogModel);
         }
 
         [HttpGet]
