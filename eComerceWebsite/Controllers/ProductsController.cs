@@ -106,6 +106,22 @@ namespace eComerceWebsite.Controllers
             return RedirectToAction("Index");
 
         }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            Products productDetails = await _context.Products.FindAsync(id);
+            if(productDetails == null)
+            {
+                return NotFound();
+            }
+            return View(productDetails);
+        }
+
+        //[HttpPost]
+        //public async Task<IActionResult> Details(int id)
+        //{
+
+        //}
     }
 }
  
