@@ -72,6 +72,7 @@ namespace eComerceWebsite.Controllers
                 _context.Products.Update(productModel);
                 await _context.SaveChangesAsync();
 
+                TempData["Message"] = $"{productModel.ProductName} was successfully updated!";
                 return RedirectToAction("Index");
             }
             return View(productModel);
