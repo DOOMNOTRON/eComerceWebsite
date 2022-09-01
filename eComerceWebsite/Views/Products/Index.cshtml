@@ -1,4 +1,4 @@
-﻿@model IEnumerable<eComerceWebsite.Models.Products>
+﻿@model ProductCatalogViewModel
 
 @{
     ViewData["Title"] = "Product Catalog";
@@ -18,37 +18,37 @@
     <a asp-action="Create" asp-controller="Products">Create Product</a>
 </p>
 
-@if (Model.Count() != 0)
+@if (Model.Products.Count() != 0)
 {
     <table class="table table-dark table-hover">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.ProductID)
+                    @Html.DisplayNameFor(model => model.Products[0].ProductID)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ProductName)
+                    @Html.DisplayNameFor(model => model.Products[0].ProductName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Rating)
+                    @Html.DisplayNameFor(model => model.Products[0].Rating)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ProductType)
+                    @Html.DisplayNameFor(model => model.Products[0].ProductType)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ProductCategoryID)
+                    @Html.DisplayNameFor(model => model.Products[0].ProductCategoryID)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ProductDescription)
+                    @Html.DisplayNameFor(model => model.Products[0].ProductDescription)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ProductPrice)
+                    @Html.DisplayNameFor(model => model.Products[0].ProductPrice)
                 </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (Products item in Model)
+            @foreach (Products item in Model.Products)
             {
                 <tr>
                     <td>
@@ -86,5 +86,9 @@
 else
 {
     <h2>There are no games for this page.</h2>
+}
+
+@for (int i = 1; i <= Model.LastPage; i++){
+    <p>@i</p>
 }
 
