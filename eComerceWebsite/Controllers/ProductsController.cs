@@ -52,5 +52,16 @@ namespace eComerceWebsite.Controllers
 
             return View(addedProduct);
         }
+
+        public async Task<IActionResult> Edit(int id) // must match the index
+        {
+            Products? productToEdit = await _context.Products.FindAsync(id);
+            if(productToEdit == null)
+            {
+                return NotFound();
+            }
+            return View(productToEdit);
+        }
     }
 }
+ 
