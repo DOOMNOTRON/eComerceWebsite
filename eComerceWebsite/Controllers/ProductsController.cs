@@ -117,11 +117,6 @@ namespace eComerceWebsite.Controllers
             return View(productDetails);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Details(int id)
-        //{
-
-        //}
     }
 }
  
