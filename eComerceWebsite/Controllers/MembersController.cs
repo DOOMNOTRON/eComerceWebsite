@@ -36,6 +36,8 @@ namespace eComerceWebsite.Controllers
                 _context.Members.Add(newMember);
                 await _context.SaveChangesAsync();
 
+                LogUserIn(newMember.Email);
+
                 // Redirect to home page
                 return RedirectToAction("Index", "Home");
             }
@@ -49,7 +51,7 @@ namespace eComerceWebsite.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel loginModel)
+        public IActionResult Login(LoginViewModel loginModel)
         {
             if (ModelState.IsValid)
             {
@@ -61,7 +63,7 @@ namespace eComerceWebsite.Controllers
                 // If Exists, send to homepage
                 if (m != null)
                 {
-                    HttpContext.Session.SetString("Email", loginModel.Email);
+                    LogUserIn(loginModel.Email);
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -71,6 +73,17 @@ namespace eComerceWebsite.Controllers
             // Return page if no record found, or ModelState is invalid
             return View(loginModel);
 
+        }
+
+        private void LogUserIn(string email)
+        {
+            HttpContext.Session.SetString("Email", email);
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
 
     }
