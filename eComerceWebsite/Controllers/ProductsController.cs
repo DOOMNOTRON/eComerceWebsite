@@ -52,5 +52,31 @@ namespace eComerceWebsite.Controllers
 
             return View(addedProduct);
         }
+
+        public async Task<IActionResult> Edit(int id) // must match the index
+        {
+            Products? productToEdit = await _context.Products.FindAsync(id);
+            if(productToEdit == null)
+            {
+                return NotFound();
+            }
+            return View(productToEdit);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Products productModel)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Products.Update(productModel);
+                await _context.SaveChangesAsync();
+
+                TempData["Message"] = $"{productModel.ProductName} was successfully updated!";
+                return RedirectToAction("Index");
+            }
+            return View(productModel);
+        }
     }
 }
+ 
