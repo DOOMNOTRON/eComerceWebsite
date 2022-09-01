@@ -11,7 +11,11 @@ namespace eComerceWebsite.Data
         }
 
         public DbSet<Products> Products { get; set; } //property. Gets from database
-        public DbSet <Member> MembersMembers { get; set; }
+
+        // I messed up and changed the Database table name from MemberMembers to Members
+        // I created a massive problem. To fix restart Visual Studio.
+        // Then set the Dbset name to the previous name then update.
+        public DbSet <Member> Members { get; set; }
 
 
 
