@@ -10,7 +10,8 @@ namespace eComerceWebsite.Data
 
         }
 
-        public DbSet<Products> Products { get; set; } //property
+        public DbSet<Products> Products { get; set; } //property. Gets from database
+        public DbSet <Member> MembersMembers { get; set; }
 
 
 
